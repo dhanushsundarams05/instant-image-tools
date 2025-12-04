@@ -51,6 +51,15 @@
 </head>
 <body>
     <div id="root"></div>
+<script>
+(function(){
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect);
+    }
+})();
+</script>
 
     <script type="text/babel">
         const { useState, useRef, useEffect } = React;
@@ -78,29 +87,27 @@
 
             // URL routing with hash
             useEffect(() => {
-                // Set initial tool based on URL hash
-                const hash = window.location.hash.slice(1); // Remove '#' from hash
-                if (hash) {
-                    setActiveTool(hash);
+                const path = window.location.pathname.replace('/instant-image-tools/', '');
+                if (path) {
+                    setActiveTool(path);
                 }
-
-                // Listen for hash changes
-                const handleHashChange = () => {
-                    const newHash = window.location.hash.slice(1);
-                    setActiveTool(newHash || 'home');
+                
+                const handlePopState = () => {
+                    const newPath = window.location.pathname.replace('/instant-image-tools/', '');
+                    setActiveTool(newPath || 'home');
                 };
-
-                window.addEventListener('hashchange', handleHashChange);
-                return () => window.removeEventListener('hashchange', handleHashChange);
+                
+                window.addEventListener('popstate', handlePopState);
+                return () => window.removeEventListener('popstate', handlePopState);
             }, []);
 
-            // Update URL when tool changes
             useEffect(() => {
-                const newHash = activeTool === 'home' ? '' : `#${activeTool}`;
-                if (window.location.hash !== newHash) {
-                    window.history.pushState(null, '', newHash || window.location.pathname);
+                const newPath = activeTool === 'home' ? '/instant-image-tools/' : `/instant-image-tools/${activeTool}`;
+                if (window.location.pathname !== newPath) {
+                    window.history.pushState(null, '', newPath);
                 }
             }, [activeTool]);
+
             const [currentPage, setCurrentPage] = useState('home');
             const [image, setImage] = useState(null);
             const [processedImage, setProcessedImage] = useState(null);
