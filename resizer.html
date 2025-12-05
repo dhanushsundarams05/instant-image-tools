@@ -118,7 +118,7 @@
                 }
                 
                 const handlePopState = () => {
-                    const newPath = window.location.pathname.replace('/instant-image-tools/', '');
+                    const newPath = window.location.pathname.slice(1) || 'home';
                     setActiveTool(newPath || 'home');
                 };
                 
