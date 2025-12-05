@@ -68,6 +68,65 @@
   ]
 }
   </script>
+
+    <style>
+        /* Range Slider Styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #4f46e5 0%, #4f46e5 80%, #e5e7eb 80%, #e5e7eb 100%);
+            outline: none;
+            opacity: 1;
+            transition: opacity 0.2s;
+        }
+
+        input[type="range"]:hover {
+            opacity: 1;
+        }
+
+        /* Webkit (Chrome, Safari, Edge) */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #4338ca;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Firefox */
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            background: #4338ca;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Track styling for Firefox */
+        input[type="range"]::-moz-range-track {
+            height: 8px;
+            border-radius: 5px;
+            background: #e5e7eb;
+        }
+    </style>
 </head>
 <body>
   <div id="root">
@@ -1153,7 +1212,12 @@
                                                         max="1"
                                                         step="0.1"
                                                         value={quality}
-                                                        onChange={(e) => setQuality(parseFloat(e.target.value))}
+                                                        onChange={(e) => {
+                                        const val = parseFloat(e.target.value);
+                                        setQuality(val);
+                                        // Update slider background
+                                        e.target.style.background = `linear-gradient(to right, #4f46e5 0%, #4f46e5 ${val * 100}%, #e5e7eb ${val * 100}%, #e5e7eb 100%)`;
+                                    }}
                                                         className="w-full"
                                                     />
                                                     <p className="text-sm text-gray-600 mt-2">
