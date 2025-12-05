@@ -163,7 +163,7 @@
             const [maintainRatio, setMaintainRatio] = useState(true);
 
             const tools = [
-                { id: 'compress', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
+                { id: 'compressor', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
                 { id: 'metadata', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
                 { id: 'heic', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
                 { id: 'convert', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
@@ -171,7 +171,7 @@
             ];
 
             const toolContent = {
-                compress: {
+                compressor: {
                     what: "Image Compressor is a browser-based tool that reduces the file size of your images without significantly compromising visual quality. It works by adjusting the compression level of JPEG images, allowing you to find the perfect balance between file size and image quality. All processing happens locally in your browser, ensuring complete privacy.",
                     benefits: [
                         "Reduce file sizes by up to 90% while maintaining visual quality",
@@ -568,7 +568,7 @@
 
             const handleProcess = () => {
                 switch(activeTool) {
-                    case 'compress':
+                    case 'compressor':
                         compressImage();
                         break;
                     case 'metadata':
