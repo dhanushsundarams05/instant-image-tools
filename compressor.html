@@ -1,92 +1,81 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Instant Image Tool - Free online image tools. Compress, resize, convert, and remove EXIF data from images. All processing done in your browser for complete privacy.">
+    <meta name="keywords" content="image compressor, EXIF remover, HEIC to JPG, image converter, resize image, online image tools, free image editor">
+    <title>Image Compressor - Reduce Image Size Online | Instant Image Tool</title>
 
-  <!-- Page title & description -->
-  <title>Image Compressor – Reduce Image Size Online | Instant Image Tool</title>
-  <meta name="description" content="Free online image compressor. Reduce JPG and PNG image size instantly while keeping quality. 100% privacy — images never leave your device." />
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://instantimagetool.com/compressor" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Free Image Compressor – Reduce Image Size Online" />
-  <meta property="og:description" content="Compress images instantly. Private, fast, and free." />
-  <meta property="og:url" content="https://instantimagetool.com/compressor" />
-  <meta property="og:image" content="https://instantimagetool.com/share.jpg" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Free Image Compressor – Reduce Image Size Online" />
-  <meta name="twitter:description" content="Compress images instantly. Private, fast, and free." />
-  <meta name="twitter:image" content="https://instantimagetool.com/share.jpg" />
-
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <link rel="shortcut icon" href="logo.jpg">
     <link rel="apple-touch-icon" href="logo.jpg">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Free Image Compressor - Reduce Image Size Online" />
+    <meta property="og:description" content="Compress images instantly. Private, fast, and free." />
+    <meta property="og:url" content="https://instantimagetool.com/compressor" />
+    <meta property="og:image" content="https://instantimagetool.com/share.jpg" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Free Image Compressor - Reduce Image Size Online" />
+    <meta name="twitter:description" content="Compress images instantly. Private, fast, and free." />
+    <meta name="twitter:image" content="https://instantimagetool.com/share.jpg" />
+    <!-- Canonical -->
+    <link rel="canonical" href="https://instantimagetool.com/compressor" />
 
-  <!-- CSS/Frameworks/React -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Structured Data (FAQ Schema) -->
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much can I compress an image without losing quality?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Generally, you can compress images to 70-80% quality without noticeable loss. For web use, 60-70% is often acceptable."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does compression remove EXIF data?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Our compression process removes most EXIF metadata. For complete metadata removal, use our dedicated EXIF Cleaner tool."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is image compression safe?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, all image processing happens locally in your browser. Your images never leave your device or get uploaded to any server."
-      }
-    }
-  ]
-}
-  </script>
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Babel Standalone for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .icon-lg {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .icon-xl {
+            width: 4rem;
+            height: 4rem;
+        }
+    </style>
 </head>
 <body>
-  <div id="root">
-    <!-- noscript fallback for SEO -->
-    <noscript>
-      <div style="font-family: Arial, sans-serif; max-width:800px;margin:2rem auto;padding:1rem;">
-        <h1>Free Image Compressor – Reduce Image Size Online</h1>
-        <p>Free online image compressor. Reduce JPG and PNG image size instantly while keeping quality. 100% privacy — images never leave your device.</p>
-      </div>
-    </noscript>
-  </div>
+    <div id="root"></div>
+<script>
+(function(){
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect);
+    }
+})();
+</script>
 
-  <!-- Force SPA to open compress tool -->
-  <script>
-    sessionStorage.redirect = window.location.pathname;
-  </script>
-
-  <!-- React Application Script -->
-  <script type="text/babel">
+    <script type="text/babel">
         const { useState, useRef, useEffect } = React;
 
         // Icon Components
@@ -1347,6 +1336,5 @@
 
         ReactDOM.render(<ImageTools />, document.getElementById('root'));
     </script>
-
 </body>
 </html>
