@@ -115,20 +115,14 @@
         const ImageTools = () => {
             const [activeTool, setActiveTool] = useState('home');
 
-            // URL routing with hash
             useEffect(() => {
-                const basePath = window.location.pathname.startsWith('/instant-image-tools/')
-                        ? '/instant-image-tools/'
-                        : '/';
-
-                    // Read path from URL
-                    const path = window.location.pathname.replace(basePath, '').replace('/', '');
-                    if (path) {
+                const path = window.location.pathname.slice(1) || 'home';
+                if (path) {
                     setActiveTool(path);
                 }
                 
                 const handlePopState = () => {
-                    const newPath = window.location.pathname.replace(basePath, '').replace('/', '');
+                    const newPath = window.location.pathname.slice(1) || 'home';
                     setActiveTool(newPath || 'home');
                 };
                 
@@ -137,13 +131,7 @@
             }, []);
 
             useEffect(() => {
-                const basePath = window.location.pathname.startsWith('/instant-image-tools/')
-                        ? '/instant-image-tools/'
-                        : '/';
-
-                    const newPath = activeTool === 'home'
-                        ? basePath
-                        : `${basePath}${activeTool}`;
+                const newPath = activeTool === 'home' ? '/' : `/${activeTool}`;
                 if (window.location.pathname !== newPath) {
                     window.history.pushState(null, '', newPath);
                 }
