@@ -127,7 +127,7 @@
             }, []);
 
             useEffect(() => {
-                const newPath = activeTool === 'home' ? '/instant-image-tools/' : `/instant-image-tools/${activeTool}`;
+                const newPath = activeTool === 'home' ? '/' : `/${activeTool}`;
                 if (window.location.pathname !== newPath) {
                     window.history.pushState(null, '', newPath);
                 }
