@@ -153,7 +153,7 @@
                 { id: 'metadata', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
                 { id: 'heic', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
                 { id: 'convert', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
-                { id: 'resize', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
+                { id: 'resizer', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
             ];
 
             const toolContent = {
@@ -369,7 +369,7 @@
                         }
                     ]
                 },
-                resize: {
+                resizer: {
                     what: "Image Resizer allows you to change the dimensions (width and height) of your images. Whether you need to make images smaller for web use, create thumbnails, or resize for specific platform requirements, this tool handles it all while maintaining aspect ratio and quality.",
                     benefits: [
                         "Optimize images for faster website loading",
@@ -566,7 +566,7 @@
                     case 'convert':
                         convertFormat('png');
                         break;
-                    case 'resize':
+                    case 'resizer':
                         resizeImage();
                         break;
                 }
@@ -1162,7 +1162,7 @@
                                                 </div>
                                             )}
 
-                                            {activeTool === 'resize' && (
+                                            {activeTool === 'resizer' && (
                                                 <div className="grid grid-cols-2 gap-4">
                                                     <div>
                                                         <label className="block text-sm font-medium mb-2">Width (px)</label>
@@ -1281,7 +1281,7 @@
                                     <ol className="list-decimal list-inside space-y-2 text-gray-700">
                                         <li>Click "Select Image" to choose an image from your device</li>
                                         {activeTool === 'compress' && <li>Adjust the quality slider to set compression level (lower = smaller file)</li>}
-                                        {activeTool === 'resize' && <li>Enter desired width and/or height dimensions in pixels</li>}
+                                        {activeTool === 'resizer' && <li>Enter desired width and/or height dimensions in pixels</li>}
                                         {activeTool === 'metadata' && <li>No settings needed - EXIF data will be automatically removed</li>}
                                         <li>Click "Process Image" to apply the transformation</li>
                                         <li>Preview the result and click "Download" to save the processed image</li>
