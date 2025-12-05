@@ -5,23 +5,23 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <!-- Page title & description -->
-  <title>Instant Image Tool – Free Online Image Editor & Converter</title>
-  <meta name="description" content="Free online image tools: compress, resize, convert formats (HEIC to JPG), remove EXIF metadata. 100% private – all processing happens in your browser." />
+  <title>JPG to PNG Converter – Free Online Image Format Converter | Instant Image Tool</title>
+  <meta name="description" content="Free online image format converter. Convert between JPG, PNG, and WebP instantly. 100% private – images never leave your browser." />
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://instantimagetool.com/" />
+  <link rel="canonical" href="https://instantimagetool.com/convert" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Instant Image Tool – Free Online Image Editor" />
-  <meta property="og:description" content="Free online image tools: compress, resize, convert, and edit images. 100% private and secure." />
-  <meta property="og:url" content="https://instantimagetool.com/" />
+  <meta property="og:title" content="Free Image Format Converter – JPG, PNG, WebP" />
+  <meta property="og:description" content="Convert image formats instantly. Private, fast, and free." />
+  <meta property="og:url" content="https://instantimagetool.com/convert" />
   <meta property="og:image" content="https://instantimagetool.com/share.jpg" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Instant Image Tool – Free Online Image Editor" />
-  <meta name="twitter:description" content="Free online image tools: compress, resize, convert, and edit images. 100% private and secure." />
+  <meta name="twitter:title" content="Free Image Format Converter – JPG, PNG, WebP" />
+  <meta name="twitter:description" content="Convert image formats instantly. Private, fast, and free." />
   <meta name="twitter:image" content="https://instantimagetool.com/share.jpg" />
 
   <link rel="icon" href="/logo.jpg" />
@@ -33,29 +33,38 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Structured Data (Website Schema) -->
+  <!-- Structured Data (FAQ Schema) -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Instant Image Tool",
-    "description": "Free online image tools for compression, resizing, format conversion, and metadata removal",
-    "url": "https://instantimagetool.com/",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Any",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When should I use PNG vs JPG?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use PNG for images requiring transparency or sharp text/graphics. Use JPG for photographs and images where smaller file size is more important than transparency."
+      }
     },
-    "featureList": [
-      "Image Compression",
-      "Image Resizing",
-      "Format Conversion (HEIC to JPG, PNG to JPG, etc.)",
-      "EXIF Metadata Removal",
-      "100% Client-side Processing"
-    ]
-  }
+    {
+      "@type": "Question",
+      "name": "What is WebP format?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WebP is a modern image format developed by Google that provides superior compression compared to JPG and PNG, resulting in smaller file sizes with similar quality."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will converting formats affect image quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Converting from JPG to PNG preserves quality. Converting to JPG may introduce compression. Our tool lets you control quality settings for optimal results."
+      }
+    }
+  ]
+}
   </script>
 </head>
 <body>
@@ -63,29 +72,15 @@
     <!-- noscript fallback for SEO -->
     <noscript>
       <div style="font-family: Arial, sans-serif; max-width:800px;margin:2rem auto;padding:1rem;">
-        <h1>Instant Image Tool – Free Online Image Editor</h1>
-        <p>Free online image tools: compress images, resize photos, convert formats (HEIC to JPG), and remove EXIF metadata. All processing happens in your browser for 100% privacy.</p>
-        <h2>Features:</h2>
-        <ul>
-          <li>Image Compressor – Reduce file size while maintaining quality</li>
-          <li>Image Resizer – Resize by pixels or percentage</li>
-          <li>HEIC to JPG Converter – Convert iPhone images</li>
-          <li>Format Converter – Convert between JPG, PNG, and WebP</li>
-          <li>EXIF Remover – Remove metadata from images</li>
-        </ul>
+        <h1>Free Image Format Converter – JPG, PNG, WebP</h1>
+        <p>Free online image format converter. Convert between JPG, PNG, and WebP instantly. 100% private – images never leave your browser.</p>
       </div>
     </noscript>
   </div>
 
-  <!-- Check for redirect from static pages -->
+  <!-- Force SPA to open convert tool -->
   <script>
-    (function() {
-      var redirect = sessionStorage.redirect;
-      delete sessionStorage.redirect;
-      if (redirect && redirect !== location.pathname) {
-        history.replaceState(null, null, redirect);
-      }
-    })();
+    sessionStorage.redirect = "/convert";
   </script>
 
   <!-- React Application Script -->
