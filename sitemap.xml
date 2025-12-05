@@ -11,22 +11,22 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://instantimagetool.com/metadata</loc>
+    <loc>https://instantimagetool.com/remove-exif</loc>
     <priority>0.80</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://instantimagetool.com/heic</loc>
+    <loc>https://instantimagetool.com/heic-to-jpg</loc>
     <priority>0.80</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://instantimagetool.com/convert</loc>
+    <loc>https://instantimagetool.com/jpg-to-png</loc>
     <priority>0.80</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://instantimagetool.com/resize</loc>
+    <loc>https://instantimagetool.com/resizer</loc>
     <priority>0.80</priority>
     <changefreq>monthly</changefreq>
   </url>
