@@ -5,23 +5,23 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <!-- Page title & description -->
-  <title>Instant Image Tool – Free Online Image Editor & Converter</title>
-  <meta name="description" content="Free online image tools: compress, resize, convert formats (HEIC to JPG), remove EXIF metadata. 100% private – all processing happens in your browser." />
+  <title>EXIF Remover – Remove Metadata from Images Online | Instant Image Tool</title>
+  <meta name="description" content="Free EXIF metadata remover. Delete location, camera info, and other metadata from JPG and PNG images. 100% private and secure." />
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://instantimagetool.com/" />
+  <link rel="canonical" href="https://instantimagetool.com/remove-exif" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Instant Image Tool – Free Online Image Editor" />
-  <meta property="og:description" content="Free online image tools: compress, resize, convert, and edit images. 100% private and secure." />
-  <meta property="og:url" content="https://instantimagetool.com/" />
+  <meta property="og:title" content="Free EXIF Remover – Remove Image Metadata Online" />
+  <meta property="og:description" content="Remove EXIF data and metadata from images instantly in your browser." />
+  <meta property="og:url" content="https://instantimagetool.com/remove-exif" />
   <meta property="og:image" content="https://instantimagetool.com/share.jpg" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Instant Image Tool – Free Online Image Editor" />
-  <meta name="twitter:description" content="Free online image tools: compress, resize, convert, and edit images. 100% private and secure." />
+  <meta name="twitter:title" content="Free EXIF Remover – Remove Image Metadata Online" />
+  <meta name="twitter:description" content="Remove EXIF data and metadata from images instantly in your browser." />
   <meta name="twitter:image" content="https://instantimagetool.com/share.jpg" />
 
     <link rel="icon" type="image/jpeg" href="logo.jpg">
@@ -35,29 +35,38 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Structured Data (Website Schema) -->
+  <!-- Structured Data (FAQ Schema) -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Instant Image Tool",
-    "description": "Free online image tools for compression, resizing, format conversion, and metadata removal",
-    "url": "https://instantimagetool.com/",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Any",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is EXIF data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EXIF (Exchangeable Image File Format) data is metadata embedded in images containing information like camera settings, location, date, and device details."
+      }
     },
-    "featureList": [
-      "Image Compression",
-      "Image Resizing",
-      "Format Conversion (HEIC to JPG, PNG to JPG, etc.)",
-      "EXIF Metadata Removal",
-      "100% Client-side Processing"
-    ]
-  }
+    {
+      "@type": "Question",
+      "name": "Why should I remove EXIF data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Removing EXIF data protects your privacy by eliminating location information, device details, and other personal metadata before sharing images online."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does removing metadata affect image quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, removing EXIF metadata only strips the metadata tags and does not alter the actual image pixels or quality."
+      }
+    }
+  ]
+}
   </script>
 </head>
 <body>
@@ -65,29 +74,15 @@
     <!-- noscript fallback for SEO -->
     <noscript>
       <div style="font-family: Arial, sans-serif; max-width:800px;margin:2rem auto;padding:1rem;">
-        <h1>Instant Image Tool – Free Online Image Editor</h1>
-        <p>Free online image tools: compress images, resize photos, convert formats (HEIC to JPG), and remove EXIF metadata. All processing happens in your browser for 100% privacy.</p>
-        <h2>Features:</h2>
-        <ul>
-          <li>Image Compressor – Reduce file size while maintaining quality</li>
-          <li>Image Resizer – Resize by pixels or percentage</li>
-          <li>HEIC to JPG Converter – Convert iPhone images</li>
-          <li>Format Converter – Convert between JPG, PNG, and WebP</li>
-          <li>EXIF Remover – Remove metadata from images</li>
-        </ul>
+        <h1>Free EXIF Remover – Remove Image Metadata Online</h1>
+        <p>Free EXIF metadata remover. Delete location, camera info, and other metadata from JPG and PNG images. 100% private and secure.</p>
       </div>
     </noscript>
   </div>
 
-  <!-- Check for redirect from static pages -->
+  <!-- Force SPA to open metadata tool -->
   <script>
-    (function() {
-      var redirect = sessionStorage.redirect;
-      delete sessionStorage.redirect;
-      if (redirect && redirect !== location.pathname) {
-        history.replaceState(null, null, redirect);
-      }
-    })();
+    sessionStorage.redirect = window.location.pathname;
   </script>
 
   <!-- React Application Script -->
@@ -117,18 +112,13 @@
 
             // URL routing with hash
             useEffect(() => {
-                const basePath = window.location.pathname.startsWith('/instant-image-tools/')
-                        ? '/instant-image-tools/'
-                        : '/';
-
-                    // Read path from URL
-                    const path = window.location.pathname.replace(basePath, '').replace('/', '');
-                    if (path) {
+                const path = window.location.pathname.replace('/instant-image-tools/', '');
+                if (path) {
                     setActiveTool(path);
                 }
                 
                 const handlePopState = () => {
-                    const newPath = window.location.pathname.replace(basePath, '').replace('/', '');
+                    const newPath = window.location.pathname.replace('/instant-image-tools/', '');
                     setActiveTool(newPath || 'home');
                 };
                 
@@ -137,13 +127,7 @@
             }, []);
 
             useEffect(() => {
-                const basePath = window.location.pathname.startsWith('/instant-image-tools/')
-                        ? '/instant-image-tools/'
-                        : '/';
-
-                    const newPath = activeTool === 'home'
-                        ? basePath
-                        : `${basePath}${activeTool}`;
+                const newPath = activeTool === 'home' ? '/instant-image-tools/' : `/instant-image-tools/${activeTool}`;
                 if (window.location.pathname !== newPath) {
                     window.history.pushState(null, '', newPath);
                 }
@@ -165,15 +149,15 @@
             const [maintainRatio, setMaintainRatio] = useState(true);
 
             const tools = [
-                { id: 'compressor', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
-                { id: 'remove-exif', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
-                { id: 'heic-to-jpg', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
-                { id: 'jpg-to-png', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
-                { id: 'resizer', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
+                { id: 'compress', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
+                { id: 'metadata', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
+                { id: 'heic', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
+                { id: 'convert', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
+                { id: 'resize', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
             ];
 
             const toolContent = {
-                compressor: {
+                compress: {
                     what: "Image Compressor is a browser-based tool that reduces the file size of your images without significantly compromising visual quality. It works by adjusting the compression level of JPEG images, allowing you to find the perfect balance between file size and image quality. All processing happens locally in your browser, ensuring complete privacy.",
                     benefits: [
                         "Reduce file sizes by up to 90% while maintaining visual quality",
@@ -226,7 +210,7 @@
                         }
                     ]
                 },
-                'remove-exif': {
+                metadata: {
                     what: "EXIF Cleaner is a privacy-focused tool that removes all metadata from your images. Metadata (EXIF data) includes information like camera settings, GPS location, date/time, and device details. This tool strips all this information, giving you clean images safe for sharing online.",
                     benefits: [
                         "Protect your privacy by removing location data from photos",
@@ -279,7 +263,7 @@
                         }
                     ]
                 },
-                'heic-to-jpg': {
+                heic: {
                     what: "HEIC to JPG Converter transforms Apple's High Efficiency Image Format (HEIC/HEIF) files into widely-compatible JPG format. HEIC is the default format for iPhone and iPad photos since iOS 11. This tool lets you convert these images for use on non-Apple devices and platforms.",
                     benefits: [
                         "Make iPhone photos compatible with any device or platform",
@@ -332,7 +316,7 @@
                         }
                     ]
                 },
-                'jpg-to-png': {
+                convert: {
                     what: "JPG to PNG Converter transforms JPEG images into PNG format. PNG (Portable Network Graphics) is a lossless format that supports transparency and is ideal for graphics, logos, and images that require editing. This tool converts your JPG files to PNG while maintaining quality.",
                     benefits: [
                         "Convert images to a lossless format for editing",
@@ -385,7 +369,7 @@
                         }
                     ]
                 },
-                resizer: {
+                resize: {
                     what: "Image Resizer allows you to change the dimensions (width and height) of your images. Whether you need to make images smaller for web use, create thumbnails, or resize for specific platform requirements, this tool handles it all while maintaining aspect ratio and quality.",
                     benefits: [
                         "Optimize images for faster website loading",
@@ -570,19 +554,19 @@
 
             const handleProcess = () => {
                 switch(activeTool) {
-                    case 'compressor':
+                    case 'compress':
                         compressImage();
                         break;
-                    case 'remove-exif':
+                    case 'metadata':
                         removeMetadata();
                         break;
-                    case 'heic-to-jpg':
+                    case 'heic':
                         convertFormat('jpg');
                         break;
-                    case 'jpg-to-png':
+                    case 'convert':
                         convertFormat('png');
                         break;
-                    case 'resizer':
+                    case 'resize':
                         resizeImage();
                         break;
                 }
