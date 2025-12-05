@@ -1158,7 +1158,7 @@
                                         </div>
                                     ) : (
                                         <div className="space-y-6">
-                                            {activeTool === 'compress' && (
+                                            {activeTool === 'compressor' && (
                                                 <div>
                                                     <label className="block text-sm font-medium mb-2">
                                                         Quality: {Math.round(quality * 100)}%
@@ -1296,7 +1296,7 @@
                                     <h3 className="text-xl font-semibold mb-4">How to Use {currentTool.name}</h3>
                                     <ol className="list-decimal list-inside space-y-2 text-gray-700">
                                         <li>Click "Select Image" to choose an image from your device</li>
-                                        {activeTool === 'compress' && <li>Adjust the quality slider to set compression level (lower = smaller file)</li>}
+                                        {activeTool === 'compressor' && <li>Adjust the quality slider to set compression level (lower = smaller file)</li>}
                                         {activeTool === 'resize' && <li>Enter desired width and/or height dimensions in pixels</li>}
                                         {activeTool === 'metadata' && <li>No settings needed - EXIF data will be automatically removed</li>}
                                         <li>Click "Process Image" to apply the transformation</li>

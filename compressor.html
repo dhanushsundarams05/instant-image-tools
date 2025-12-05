@@ -208,7 +208,7 @@
             const [maintainRatio, setMaintainRatio] = useState(true);
 
             const tools = [
-                { id: 'compress', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
+                { id: 'compressor', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
                 { id: 'metadata', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
                 { id: 'heic', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
                 { id: 'convert', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
@@ -216,7 +216,7 @@
             ];
 
             const toolContent = {
-                compress: {
+                compressor: {
                     what: "Image Compressor is a browser-based tool that reduces the file size of your images without significantly compromising visual quality. It works by adjusting the compression level of JPEG images, allowing you to find the perfect balance between file size and image quality. All processing happens locally in your browser, ensuring complete privacy.",
                     benefits: [
                         "Reduce file sizes by up to 90% while maintaining visual quality",
@@ -613,7 +613,7 @@
 
             const handleProcess = () => {
                 switch(activeTool) {
-                    case 'compress':
+                    case 'compressor':
                         compressImage();
                         break;
                     case 'metadata':
@@ -1201,7 +1201,7 @@
                                         </div>
                                     ) : (
                                         <div className="space-y-6">
-                                            {activeTool === 'compress' && (
+                                            {activeTool === 'compressor' && (
                                                 <div>
                                                     <label className="block text-sm font-medium mb-2">
                                                         Quality: {Math.round(quality * 100)}%
@@ -1344,7 +1344,7 @@
                                     <h3 className="text-xl font-semibold mb-4">How to Use {currentTool.name}</h3>
                                     <ol className="list-decimal list-inside space-y-2 text-gray-700">
                                         <li>Click "Select Image" to choose an image from your device</li>
-                                        {activeTool === 'compress' && <li>Adjust the quality slider to set compression level (lower = smaller file)</li>}
+                                        {activeTool === 'compressor' && <li>Adjust the quality slider to set compression level (lower = smaller file)</li>}
                                         {activeTool === 'resize' && <li>Enter desired width and/or height dimensions in pixels</li>}
                                         {activeTool === 'metadata' && <li>No settings needed - EXIF data will be automatically removed</li>}
                                         <li>Click "Process Image" to apply the transformation</li>
