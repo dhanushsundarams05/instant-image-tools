@@ -112,13 +112,13 @@
 
             // URL routing with hash
             useEffect(() => {
-                const path = window.location.pathname.replace('/instant-image-tools/', '');
+                const path = window.location.pathname.slice(1) || 'home';
                 if (path) {
                     setActiveTool(path);
                 }
                 
                 const handlePopState = () => {
-                    const newPath = window.location.pathname.replace('/instant-image-tools/', '');
+                    const newPath = window.location.pathname.slice(1) || 'home';
                     setActiveTool(newPath || 'home');
                 };
                 
@@ -127,7 +127,7 @@
             }, []);
 
             useEffect(() => {
-                const newPath = activeTool === 'home' ? '/instant-image-tools/' : `/instant-image-tools/${activeTool}`;
+                const newPath = activeTool === 'home' ? '/' : `/${activeTool}`;
                 if (window.location.pathname !== newPath) {
                     window.history.pushState(null, '', newPath);
                 }
@@ -151,7 +151,7 @@
             const tools = [
                 { id: 'compress', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
                 { id: 'metadata', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
-                { id: 'heic', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
+                { id: 'heic-to-jpg', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
                 { id: 'convert', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
                 { id: 'resize', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
             ];
@@ -263,7 +263,7 @@
                         }
                     ]
                 },
-                heic: {
+                "heic-to-jpg": {
                     what: "HEIC to JPG Converter transforms Apple's High Efficiency Image Format (HEIC/HEIF) files into widely-compatible JPG format. HEIC is the default format for iPhone and iPad photos since iOS 11. This tool lets you convert these images for use on non-Apple devices and platforms.",
                     benefits: [
                         "Make iPhone photos compatible with any device or platform",
@@ -560,7 +560,7 @@
                     case 'metadata':
                         removeMetadata();
                         break;
-                    case 'heic':
+                    case 'heic-to-jpg':
                         convertFormat('jpg');
                         break;
                     case 'convert':
