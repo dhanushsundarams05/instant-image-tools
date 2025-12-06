@@ -42,6 +42,8 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- HEIC decoder for browsers that cannot draw HEIC to <img>/canvas -->
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
 
   <!-- Structured Data (Website Schema) -->
   <script type="application/ld+json">
@@ -451,17 +453,55 @@
                 }
             }, [activeTool, currentPage]);
 
-            const handleFileSelect = (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        setImage(event.target.result);
-                        setProcessedImage(null);
-                    };
-                    reader.readAsDataURL(file);
+            // inside ImageTools component, replace your existing handleFileSelect
+            const handleFileSelect = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Detect HEIC / HEIF files by MIME type or extension
+            const isHeic =
+                file.type === "image/heic" ||
+                file.type === "image/heif" ||
+                /\.heic$/i.test(file.name) ||
+                /\.heif$/i.test(file.name);
+
+            try {
+                setLoading(true);
+
+                if (isHeic && window.heic2any) {
+                // Convert HEIC -> JPEG first
+                const jpegBlob = await window.heic2any({
+                    blob: file,
+                    toType: "image/jpeg",
+                    quality: 0.95,
+                });
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    setImage(event.target.result);     // now a JPEG data URL
+                    setProcessedImage(null);
+                    setLoading(false);
+                };
+                reader.readAsDataURL(jpegBlob);
+                } else {
+                // Existing behaviour for non‑HEIC images
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    setImage(event.target.result);
+                    setProcessedImage(null);
+                    setLoading(false);
+                };
+                reader.readAsDataURL(file);
                 }
+            } catch (err) {
+                console.error(err);
+                alert(
+                "Sorry, this HEIC image could not be loaded. Please try a different file."
+                );
+                setLoading(false);
+            }
             };
+
 
             const compressImage = async () => {
                 if (!image) return;
@@ -506,30 +546,52 @@
             };
 
             const convertFormat = async (outputFormat) => {
-                if (!image) return;
-                setLoading(true);
+            if (!image) {
+                return;
+            }
 
-                const img = new Image();
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    const ctx = canvas.getContext('2d');
+            setLoading(true);
 
-                    if (outputFormat === 'png') {
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const img = new Image();
+
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext("2d");
+
+                if (outputFormat === "png") {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+                ctx.drawImage(img, 0, 0);
+
+                const mimeType = outputFormat === "png" ? "image/png" : "image/jpeg";
+
+                canvas.toBlob(
+                (blob) => {
+                    if (!blob) {
+                    setLoading(false);
+                    alert("Could not create the output image.");
+                    return;
                     }
+                    const url = URL.createObjectURL(blob);
+                    setProcessedImage(url);
+                    setLoading(false);
+                },
+                mimeType,
+                0.95
+                );
+            };
 
-                    ctx.drawImage(img, 0, 0);
+            img.onerror = () => {
+                setLoading(false);
+                alert(
+                "Your browser could not open this image format. " +
+                    "Please try a different file."
+                );
+            };
 
-                    const mimeType = outputFormat === 'png' ? 'image/png' : 'image/jpeg';
-                    canvas.toBlob((blob) => {
-                        const url = URL.createObjectURL(blob);
-                        setProcessedImage(url);
-                        setLoading(false);
-                    }, mimeType, 0.95);
-                };
-                img.src = image;
+            img.src = image;
             };
 
             const resizeImage = async () => {
