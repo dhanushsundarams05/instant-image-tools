@@ -580,7 +580,7 @@
                 if (!processedImage) return;
                 const a = document.createElement('a');
                 a.href = processedImage;
-                const extension = activeTool === 'convert' ? 'png' : 'jpg';
+                const extension = activeTool === 'jpg-to-png' ? 'png' : 'jpg';
                 a.download = `processed-image-${Date.now()}.${extension}`;
                 a.click();
             };

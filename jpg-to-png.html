@@ -152,7 +152,7 @@
                 { id: 'compress', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
                 { id: 'metadata', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
                 { id: 'heic', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
-                { id: 'convert', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
+                { id: 'jpg-to-png', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
                 { id: 'resize', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
             ];
 
@@ -316,7 +316,7 @@
                         }
                     ]
                 },
-                convert: {
+                "jpg-to-png": {
                     what: "JPG to PNG Converter transforms JPEG images into PNG format. PNG (Portable Network Graphics) is a lossless format that supports transparency and is ideal for graphics, logos, and images that require editing. This tool converts your JPG files to PNG while maintaining quality.",
                     benefits: [
                         "Convert images to a lossless format for editing",
@@ -563,7 +563,7 @@
                     case 'heic':
                         convertFormat('jpg');
                         break;
-                    case 'convert':
+                    case 'jpg-to-png':
                         convertFormat('png');
                         break;
                     case 'resize':
@@ -576,7 +576,7 @@
                 if (!processedImage) return;
                 const a = document.createElement('a');
                 a.href = processedImage;
-                const extension = activeTool === 'convert' ? 'png' : 'jpg';
+                const extension = activeTool === 'jpg-to-png' ? 'png' : 'jpg';
                 a.download = `processed-image-${Date.now()}.${extension}`;
                 a.click();
             };
