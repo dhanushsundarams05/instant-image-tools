@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Redirecting...</title>
-    <script>
-        // Save the path for the SPA to read
-        sessionStorage.redirect = location.pathname;
-    </script>
-    <meta http-equiv="refresh" content="0;URL='/'">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Instant Image Tool</title>
+    <meta name="description" content="Page not found. Return to Instant Image Tool for free online image processing tools.">
+    <meta name="robots" content="noindex, follow">
+
+    <!-- Precompiled Tailwind CSS -->
+    <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
-    <!-- GitHub Pages requires 404.html to be >512 bytes -->
-    <!-- Padding to meet minimum file size requirement -->
-    <!-- padding padding padding padding padding padding -->
-    <!-- padding padding padding padding padding padding -->
-    <!-- padding padding padding padding padding padding -->
-    <!-- padding padding padding padding padding padding -->
+<body class="bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="text-center">
+            <h1 class="text-6xl font-bold text-gray-900 mb-4">404</h1>
+            <p class="text-xl text-gray-600 mb-8">Page not found</p>
+            <a href="/" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+                Return to Home
+            </a>
+        </div>
+    </div>
 </body>
 </html>
