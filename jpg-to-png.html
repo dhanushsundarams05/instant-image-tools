@@ -112,13 +112,13 @@
 
             // URL routing with hash
             useEffect(() => {
-                const path = window.location.pathname.replace('/instant-image-tools/', '');
+                const path = window.location.pathname.slice(1) || 'home';
                 if (path) {
                     setActiveTool(path);
                 }
                 
                 const handlePopState = () => {
-                    const newPath = window.location.pathname.replace('/instant-image-tools/', '');
+                    const newPath = window.location.pathname.slice(1) || 'home';
                     setActiveTool(newPath || 'home');
                 };
                 
@@ -127,7 +127,7 @@
             }, []);
 
             useEffect(() => {
-                const newPath = activeTool === 'home' ? '/instant-image-tools/' : `/instant-image-tools/${activeTool}`;
+                const newPath = activeTool === 'home' ? '/' : `/${activeTool}`;
                 if (window.location.pathname !== newPath) {
                     window.history.pushState(null, '', newPath);
                 }
