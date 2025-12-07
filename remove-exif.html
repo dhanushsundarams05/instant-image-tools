@@ -3,40 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
 
     <!-- SEO Meta Tags -->
     <title>Remove EXIF Data from Photos Online - Free Metadata Remover | Instant Image Tool</title>
     <meta name="description" content="Remove EXIF metadata from photos online for free. Strip location, camera info, and other data from images. Secure, private, browser-based processing.">
-    <meta name="keywords" content="image compressor, resize image, HEIC to JPG, remove EXIF, image converter, photo editor online">
+    <meta name="keywords" content="remove exif, strip metadata, delete exif data, remove location from photo, privacy tool, metadata remover">
     <meta name="author" content="Instant Image Tool">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.instantimagetool.com/remove-exif.html">
+    <link rel="canonical" href="https://www.instantimagetool.com/remove-exif">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.instantimagetool.com/remove-exif.html">
+    <meta property="og:url" content="https://www.instantimagetool.com/remove-exif">
     <meta property="og:title" content="Remove EXIF Data from Photos Online - Free Metadata Remover">
     <meta property="og:description" content="Remove EXIF metadata from photos online for free. Strip location, camera info, and other data from images. Secure, private, browser-based processing.">
     <meta property="og:image" content="https://www.instantimagetool.com/share.jpg">
+    <meta property="og:image:alt" content="EXIF Metadata Remover Tool">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.instantimagetool.com/remove-exif.html">
+    <meta property="twitter:url" content="https://www.instantimagetool.com/remove-exif">
     <meta property="twitter:title" content="Remove EXIF Data from Photos Online - Free Metadata Remover">
     <meta property="twitter:description" content="Remove EXIF metadata from photos online for free. Strip location, camera info, and other data from images. Secure, private, browser-based processing.">
     <meta property="twitter:image" content="https://www.instantimagetool.com/share.jpg">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Preconnect for external resources -->
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
 
     <!-- Precompiled Tailwind CSS -->
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
 
-    <!-- Google Analytics (deferred) -->
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "EXIF Remover - Instant Image Tool",
+      "url": "https://www.instantimagetool.com/remove-exif",
+      "description": "Remove EXIF metadata from photos online for free. Strip location, camera info, and other data from images. Secure, private, browser-based processing.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "Remove EXIF metadata, Strip GPS location data, Remove camera information, Protect privacy, Browser-based processing",
+      "browserRequirements": "Requires JavaScript. Modern web browser required."
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.instantimagetool.com/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Remove EXIF Data",
+        "item": "https://www.instantimagetool.com/remove-exif"
+      }]
+    }
+    </script>
+
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Remove EXIF Data from Photos",
+      "description": "Step-by-step guide to remove EXIF metadata from images",
+      "step": [{
+        "@type": "HowToStep",
+        "name": "Upload Image",
+        "text": "Select or drag and drop your image file"
+      },{
+        "@type": "HowToStep",
+        "name": "Remove Metadata",
+        "text": "The tool automatically strips all EXIF data"
+      },{
+        "@type": "HowToStep",
+        "name": "Download",
+        "text": "Download your privacy-protected image"
+      }]
+    }
+    </script>
+
+    <!-- Google Analytics deferred -->
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-11Z5GN3XQN"></script>
     <script defer>
       window.dataLayer = window.dataLayer || [];
@@ -45,16 +114,21 @@
       gtag('config', 'G-11Z5GN3XQN');
     </script>
 
-    <!-- Lucide Icons (deferred) -->
+    <!-- Lucide Icons deferred, loaded after main content -->
     <script defer src="https://unpkg.com/lucide@latest"></script>
-
-    
-    
 </head>
 <body>
-    <div id="root"></div>
+    <header role="banner">
+        <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">Remove EXIF Data from Photos Online - Free Metadata Remover</h1>
+    </header>
 
-    <!-- Compiled React App (module) -->
+    <main role="main" id="root"></main>
+
+    <footer role="contentinfo" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">
+        <p>&copy; 2025 Instant Image Tool. All rights reserved.</p>
+    </footer>
+
+    <!-- Compiled React App module -->
     <script type="module" src="/src/remove-exif.jsx"></script>
 </body>
 </html>

@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
 
     <!-- SEO Meta Tags -->
     <title>Free Online Image Tools - Compress, Resize, Convert & Remove EXIF | Instant Image Tool</title>
     <meta name="description" content="Free online image tools: compress images, resize photos, convert formats (HEIC to JPG), and remove EXIF metadata. All processing happens in your browser for 100% privacy.">
-    <meta name="keywords" content="image compressor, resize image, HEIC to JPG, remove EXIF, image converter, photo editor online">
+    <meta name="keywords" content="free image tools, online image editor, browser-based image processing, privacy-focused image tools, instant image tool">
     <meta name="author" content="Instant Image Tool">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.instantimagetool.com/">
@@ -18,6 +19,7 @@
     <meta property="og:title" content="Free Online Image Tools - Compress, Resize, Convert & Remove EXIF">
     <meta property="og:description" content="Professional image processing tools that work directly in your browser. Compress, resize, convert formats, and remove EXIF data with complete privacy.">
     <meta property="og:image" content="https://www.instantimagetool.com/share.jpg">
+    <meta property="og:image:alt" content="Instant Image Tool - Free Online Image Processing">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -28,15 +30,64 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Preconnect for external resources -->
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
 
     <!-- Precompiled Tailwind CSS -->
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
 
-    <!-- Google Analytics (deferred) -->
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Instant Image Tool",
+      "url": "https://www.instantimagetool.com/",
+      "description": "Free online image tools: compress images, resize photos, convert formats (HEIC to JPG), and remove EXIF metadata. All processing happens in your browser for 100% privacy.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Image Compression",
+        "Image Resizing",
+        "HEIC to JPG Conversion",
+        "JPG to PNG Conversion",
+        "EXIF Data Removal"
+      ],
+      "browserRequirements": "Requires JavaScript. Modern web browser required.",
+      "softwareHelp": {
+        "@type": "WebPage",
+        "url": "https://www.instantimagetool.com/"
+      }
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.instantimagetool.com/"
+      }]
+    }
+    </script>
+
+    <!-- Google Analytics deferred -->
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-11Z5GN3XQN"></script>
     <script defer>
       window.dataLayer = window.dataLayer || [];
@@ -45,13 +96,21 @@
       gtag('config', 'G-11Z5GN3XQN');
     </script>
 
-    <!-- Lucide Icons (deferred, loaded after main content) -->
+    <!-- Lucide Icons deferred, loaded after main content -->
     <script defer src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div id="root"></div>
+    <header role="banner">
+        <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">Free Online Image Tools - Instant Image Tool</h1>
+    </header>
 
-    <!-- Compiled React App (module) -->
+    <main role="main" id="root"></main>
+
+    <footer role="contentinfo" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">
+        <p>&copy; 2025 Instant Image Tool. All rights reserved.</p>
+    </footer>
+
+    <!-- Compiled React App module -->
     <script type="module" src="/src/index.jsx"></script>
 </body>
 </html>
