@@ -528,7 +528,7 @@ import { createRoot } from 'react-dom/client';
                             onClick={() => navigateToPage('home')}
                         >
                             <img 
-                                src="logo.jpg" 
+                                src="/logo.jpg" 
                                 alt="Instant Image Tool" 
                                 className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg object-cover"
                             />
