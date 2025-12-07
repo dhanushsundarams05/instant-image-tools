@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import heic2any from 'heic2any';  // ← ADD THIS
 
 // Icon Components
         const Icon = ({ name, className = "", size = 24 }) => {
@@ -365,21 +366,27 @@ import { createRoot } from 'react-dom/client';
             try {
                 setLoading(true);
 
-                if (isHeic && window.heic2any) {
-                // Convert HEIC -> JPEG first
-                const jpegBlob = await window.heic2any({
-                    blob: file,
-                    toType: "image/jpeg",
-                    quality: 0.95,
-                });
-
+            // NEW CODE:
+                if (isHeic) {
+                try {
+                    const jpegBlob = await heic2any({
+                        blob: file,
+                        toType: 'image/jpeg',
+                        quality: 0.95,
+                    });
                 const reader = new FileReader();
                 reader.onload = (event) => {
-                    setImage(event.target.result);     // now a JPEG data URL
+                    setImage(event.target.result);     
                     setProcessedImage(null);
                     setLoading(false);
                 };
                 reader.readAsDataURL(jpegBlob);
+                } catch (heicError) {
+                    console.error('HEIC conversion failed:', heicError);
+                    alert('Failed to convert HEIC image. Please try a different file.');
+                    setLoading(false);
+                    return;
+                }
                 } else {
                 // Existing behaviour for non‑HEIC images
                 const reader = new FileReader();
