@@ -30,3 +30,9 @@ yarn-error.log*
 # Temporary
 *.tmp
 *.temp
+
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
