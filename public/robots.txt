@@ -5,7 +5,7 @@ Disallow: /src/
 Disallow: /node_modules/
 
 # Sitemap
-Sitemap: https://www.instantimagetool.com/sitemap.xml
+Sitemap: https://instantimagetool.com/sitemap.xml
 
 # Crawl-delay (optional, for polite crawlers)
 Crawl-delay: 1
