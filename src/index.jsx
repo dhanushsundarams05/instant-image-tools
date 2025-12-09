@@ -1,74 +1,64 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import heic2any from 'heic2any';  // ← ADD THIS
+import heic2any from 'heic2any';
 
-// Icon Components
-        const Icon = ({ name, className = "", size = 24 }) => {
-            const iconRef = useRef(null);
+// Icon Component
+const Icon = ({ name, className = '', size = 24 }) => {
+const iconRef = useRef(null);
 
-            useEffect(() => {
-                if (iconRef.current && window.lucide) {
-                    const icon = window.lucide.createElement(window.lucide[name]);
-                    if (icon) {
-                        iconRef.current.innerHTML = '';
-                        iconRef.current.appendChild(icon);
-                    }
-                }
-            }, [name]);
+  useEffect(() => {
+    if (iconRef.current && window.lucide) {
+      const icon = window.lucide.createElement(window.lucide[name]);
+      if (icon) {
+        iconRef.current.innerHTML = '';
+        iconRef.current.appendChild(icon);
+      }
+    }
+  }, [name]);
 
-            return <i ref={iconRef} className={className} style={{ width: size, height: size, display: 'inline-flex', justifyContent: 'center', alignItems: 'center' }} />;
-        };
+  return (
+    <i 
+      ref={iconRef} 
+      className={className}
+      style={{ width: size, height: size, display: 'inline-flex', justifyContent: 'center', alignItems: 'center' }}
+    />
+  );
+};
 
-        
-        const ImageTools = () => {
-            const [activeTool, setActiveTool] = useState('home');
+const ImageTools = () => {
+  // Initialize activeTool from URL pathname on mount
+  const [activeTool, setActiveTool] = useState(() => {
+    const path = window.location.pathname.slice(1) || 'home';
+    return path === '' ? 'home' : path;
+  });
 
-            useEffect(() => {
-                const path = window.location.pathname.slice(1) || 'home';
-                if (path) {
-                    setActiveTool(path);
-                }
-                
-                const handlePopState = () => {
-                    const newPath = window.location.pathname.slice(1) || 'home';
-                    setActiveTool(newPath || 'home');
-                };
-                
-                window.addEventListener('popstate', handlePopState);
-                return () => window.removeEventListener('popstate', handlePopState);
-            }, []);
+  const [currentPage, setCurrentPage] = useState(() => {
+    const path = window.location.pathname.slice(1) || 'home';
+    return path === '' ? 'home' : path;
+  });
 
-            useEffect(() => {
-                const newPath = activeTool === 'home' ? '/' : `/${activeTool}`;
-                if (window.location.pathname !== newPath) {
-                    window.history.pushState(null, '', newPath);
-                }
-            }, [activeTool]);
+  const [image, setImage] = useState(null);
+  const [processedImage, setProcessedImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const fileInputRef = useRef(null);
 
-            const [currentPage, setCurrentPage] = useState('home');
-            const [image, setImage] = useState(null);
-            const [processedImage, setProcessedImage] = useState(null);
-            const [loading, setLoading] = useState(false);
-            const [openFaqIndex, setOpenFaqIndex] = useState(null);
-            const fileInputRef = useRef(null);
+  // Compression settings
+  const [quality, setQuality] = useState(0.8);
 
-            // Compression settings
-            const [quality, setQuality] = useState(0.8);
+  // Resize settings
+  const [width, setWidth] = useState('');
+  const [height, setHeight] = useState('');
+  const [maintainRatio, setMaintainRatio] = useState(true);
 
-            // Resize settings
-            const [width, setWidth] = useState('');
-            const [height, setHeight] = useState('');
-            const [maintainRatio, setMaintainRatio] = useState(true);
-
-            const tools = [
-                { id: 'compressor', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
-                { id: 'remove-exif', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
-                { id: 'heic-to-jpg', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
-                { id: 'jpg-to-png', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
-                { id: 'resizer', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
-            ];
-
-            const toolContent = {
+  const tools = [
+    { id: 'compressor', name: 'Image Compressor', icon: 'Scissors', desc: 'Reduce image file size while maintaining quality' },
+    { id: 'remove-exif', name: 'EXIF Cleaner', icon: 'Trash2', desc: 'Remove metadata and EXIF data from images' },
+    { id: 'heic-to-jpg', name: 'HEIC to JPG', icon: 'RefreshCw', desc: 'Convert HEIC/HEIF images to JPG format' },
+    { id: 'jpg-to-png', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
+    { id: 'resizer', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
+  ];
+const toolContent = {
                 compressor: {
                     what: "Image Compressor is a browser-based tool that reduces the file size of your images without significantly compromising visual quality. It works by adjusting the compression level of JPEG images, allowing you to find the perfect balance between file size and image quality. All processing happens locally in your browser, ensuring complete privacy.",
                     benefits: [
@@ -587,30 +577,34 @@ import heic2any from 'heic2any';  // ← ADD THIS
 
             // Static Header Component - Same across all pages
             const Header = () => (
-                <header className="bg-white shadow-sm sticky top-0 z-50">
-                    <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4 flex flex-row items-center justify-between gap-2">
-                        <div 
-                            className="flex items-center gap-3 cursor-pointer" 
-                            onClick={() => navigateToPage('home')}
-                        >
-                            <img 
-                                src="/logo.jpg" 
-                                alt="Instant Image Tool" 
-                                className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg object-cover"
-                            />
-                            <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">Instant Image Tool</h1>
-                        </div>
-                        {(activeTool !== 'home' || currentPage !== 'home') && (
-                            <button
-                                onClick={() => navigateToPage('home')}
-                                className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors whitespace-nowrap flex-shrink-0"
-                            >
-                                <Icon name="Home" size={18} />
-                                <span className="hidden sm:inline">Home</span>
-                            </button>
-                        )}
-                    </div>
-                </header>
+            <header className="bg-white shadow-sm sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4 flex flex-row items-center justify-between gap-2">
+                {/* Logo + title link to home */}
+                <a href="/" className="flex items-center gap-3">
+                    <img
+                    src="logo.jpg"
+                    alt="Instant Image Tool"
+                    className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg object-cover"
+                    />
+                    <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">
+                    Instant Image Tool
+                    </h1>
+                </a>
+
+                {/* Home button when not already on / */}
+                {window.location.pathname !== '/' && (
+                    <a
+                    href="/"
+                    className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2
+                                bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors
+                                whitespace-nowrap flex-shrink-0"
+                    >
+                    <Icon name="Home" size={18} />
+                    <span className="hidden sm:inline">Home</span>
+                    </a>
+                )}
+                </div>
+            </header>
             );
 
             // Footer Component
@@ -618,11 +612,11 @@ import heic2any from 'heic2any';  // ← ADD THIS
                 <footer className="bg-gray-800 text-white mt-16 py-8">
                     <div className="max-w-7xl mx-auto px-4 text-center">
                         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-4 text-sm sm:text-base">
-                            <button onClick={() => navigateToPage('about')} className="hover:text-gray-300">About</button>
-                            <button onClick={() => navigateToPage('contact')} className="hover:text-gray-300">Contact</button>
-                            <button onClick={() => navigateToPage('privacy')} className="hover:text-gray-300">Privacy Policy</button>
-                            <button onClick={() => navigateToPage('terms')} className="hover:text-gray-300">Terms & Conditions</button>
-                            <button onClick={() => navigateToPage('disclaimer')} className="hover:text-gray-300">Disclaimer</button>
+                            <a href="/about" className="hover:text-gray-300">About</a>
+                            <a href="/contact" className="hover:text-gray-300">Contact</a>
+                            <a href="/privacy" className="hover:text-gray-300">Privacy Policy</a>
+                            <a href="/terms" className="hover:text-gray-300">Terms & Conditions</a>
+                            <a href="/disclaimer" className="hover:text-gray-300">Disclaimer</a>
                         </div>
                         <p className="mb-2 text-sm sm:text-base">© 2025 Instant Image Tool. All processing done in your browser.</p>
                         <p className="text-xs sm:text-sm text-gray-400">Supported formats: JPG, PNG, HEIC, HEIF, WebP, GIF, BMP</p>
@@ -1033,15 +1027,15 @@ import heic2any from 'heic2any';  // ← ADD THIS
                             <h2 className="text-2xl font-semibold mb-6">Choose Your Tool</h2>
                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {tools.map(tool => (
-                                    <div
+                                    <a
                                         key={tool.id}
-                                        onClick={() => selectTool(tool.id)}
-                                        className="bg-white rounded-lg shadow-md p-6 cursor-pointer hover:shadow-xl transition-shadow"
+                                        href={`/${tool.id}`}
+                                        className="bg-white rounded-lg shadow-md p-6 block hover:shadow-xl transition-shadow"
                                     >
                                         <Icon name={tool.icon} size={48} className="text-indigo-600 mb-4" />
                                         <h3 className="text-xl font-semibold mb-2">{tool.name}</h3>
                                         <p className="text-gray-600">{tool.desc}</p>
-                                    </div>
+                                    </a>
                                 ))}
                             </div>
 
@@ -1299,7 +1293,7 @@ import heic2any from 'heic2any';  // ← ADD THIS
                                         {tools.filter(t => t.id !== activeTool).map(tool => (
                                             <button
                                                 key={tool.id}
-                                                onClick={() => selectTool(tool.id)}
+                                                onClick={() => {window.location.href = `/${tool.id}`;}} 
                                                 className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors text-left"
                                             >
                                                 <Icon name={tool.icon} size={24} className="text-indigo-600 flex-shrink-0" />
