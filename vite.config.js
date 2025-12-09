@@ -12,6 +12,8 @@ export default defineConfig({
         compressor: resolve(__dirname, 'compressor.html'),
         'heic-to-jpg': resolve(__dirname, 'heic-to-jpg.html'),
         'jpg-to-png': resolve(__dirname, 'jpg-to-png.html'),
+        'png-to-jpg': resolve(__dirname, 'png-to-jpg.html'),
+        'jpg-to-webp': resolve(__dirname, 'jpg-to-webp.html'),
         'remove-exif': resolve(__dirname, 'remove-exif.html'),
         resizer: resolve(__dirname, 'resizer.html'),
         about: resolve(__dirname, 'about.html'),
