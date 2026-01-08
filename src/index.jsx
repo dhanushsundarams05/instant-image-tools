@@ -58,6 +58,8 @@ const ImageTools = () => {
     { id: 'jpg-to-png', name: 'JPG to PNG', icon: 'RefreshCw', desc: 'Convert JPG images to PNG format' },
     { id: 'png-to-jpg', name: 'PNG to JPG', icon: 'RefreshCw', desc: 'Convert PNG images to JPG format.' },
     { id: 'jpg-to-webp', name: 'JPG to WebP', icon: 'RefreshCw', desc: 'Convert JPG images to WebP format.' },
+    { id: 'png-to-webp', name: 'PNG to WebP', icon: 'RefreshCw', desc: 'Convert PNG images to WebP format.'},
+    { id: 'webp-to-jpg', name: 'WebP to JPG', icon: 'RefreshCw', desc: 'Convert WebP images to JPG format.'},
     { id: 'resizer', name: 'Image Resizer', icon: 'Maximize2', desc: 'Resize images to custom dimensions' }
   ];
 const toolContent = {
@@ -379,6 +381,104 @@ const toolContent = {
                     }
                     ]
                 },
+                'png-to-webp': {
+                    what: 'PNG to WebP Converter transforms PNG (Portable Network Graphics) images into WebP format. WebP is a modern image format that can significantly reduce file size compared to PNG while keeping good visual quality, making it ideal for websites and faster sharing. This tool converts your PNG files to WebP directly in your browser for privacy.',
+                    benefits: [
+                        'Reduce file sizes compared to PNG for faster loading',
+                        'Improve website performance and Core Web Vitals',
+                        'Save bandwidth for image-heavy pages',
+                        'Keep good image quality with modern compression',
+                        'Great for web delivery and modern browsers',
+                        'Private processing - no server uploads'
+                    ],
+                    features: [
+                        'Converts PNG to WebP format',
+                        'High-quality WebP output',
+                        'Maintains original image dimensions',
+                        'Instant browser-based conversion',
+                        'No file size limits',
+                        'Private processing - no server uploads'
+                    ],
+                    faqs: [
+                        {
+                        q: "What's the difference between PNG and WebP?",
+                        a: "PNG is lossless and often larger, while WebP is a modern format that can produce much smaller files at similar visual quality. WebP is usually better for websites when supported."
+                        },
+                        {
+                        q: "Will PNG transparency be preserved in WebP?",
+                        a: "WebP can support transparency, but the final result depends on how the browser encodes it. If transparency is critical, verify the output after download."
+                        },
+                        {
+                        q: "Is WebP supported everywhere?",
+                        a: "Most modern browsers support WebP, but some older apps and workflows still prefer PNG/JPG. Keep originals if you need maximum compatibility."
+                        },
+                        {
+                        q: "Is converting PNG to WebP lossless?",
+                        a: "It can be lossy or lossless depending on encoding settings. This tool uses browser encoding, which typically prioritizes good compression with high visual quality."
+                        },
+                        {
+                        q: "Why is my WebP not much smaller than PNG?",
+                        a: "If the PNG is already optimized or contains flat colors/text, the size reduction may be smaller. Photos usually see bigger savings."
+                        },
+                        {
+                        q: "Does this tool upload my images?",
+                        a: "No. Processing happens locally in your browser."
+                        }
+                    ]
+                    },
+                'webp-to-jpg': {
+                    what: 'WebP to JPG Converter transforms WebP images into JPG/JPEG format for wider compatibility. WebP is a modern format commonly used on websites, but some apps, editors, or devices still require JPG. This tool converts WebP files to JPG quickly while keeping good visual quality.',
+                    benefits: [
+                        'Open WebP images in tools that only support JPG/JPEG',
+                        'Upload images to platforms that don’t accept WebP',
+                        'Share photos more easily with older apps and devices',
+                        'Simplify workflows that are built around JPG files',
+                        'Maintain original dimensions during conversion',
+                        'Private processing - no server uploads'
+                    ],
+                    features: [
+                        'Converts WebP to JPG/JPEG format',
+                        'High-quality conversion with minimal quality loss',
+                        'Maintains original image dimensions',
+                        'Instant browser-based conversion',
+                        'No file size limits',
+                        'Private processing - no server uploads'
+                    ],
+                    faqs: [
+                        {
+                        q: "Why can't some apps open WebP files?",
+                        a: "WebP is newer than JPG, so older software and some platforms don’t include WebP decoding support. Converting to JPG makes the image usable almost everywhere."
+                        },
+                        {
+                        q: "Will converting WebP to JPG reduce quality?",
+                        a: "JPG is lossy, so some quality loss is possible. In most real-world photos, the difference is small, especially when exporting with high quality settings."
+                        },
+                        {
+                        q: "What happens to transparency in WebP after converting to JPG?",
+                        a: "JPG doesn’t support transparency. Any transparent areas will be flattened (usually to a solid background). If you need transparency, convert to PNG instead."
+                        },
+                        {
+                        q: "Is WebP always smaller than JPG?",
+                        a: "Often yes, but not always. WebP usually compresses better, but the result depends on the image content and compression settings."
+                        },
+                        {
+                        q: "Can I convert animated WebP to JPG?",
+                        a: "No. JPG is a single-image format. If the WebP is animated, only a still frame may be used, or the browser may fail to load it correctly."
+                        },
+                        {
+                        q: "Does this tool upload my images?",
+                        a: "No. The conversion runs in your browser, so your image stays on your device."
+                        },
+                        {
+                        q: "Can I convert multiple files at once?",
+                        a: "Currently, the tool processes one image at a time. You can repeat the steps for each file."
+                        },
+                        {
+                        q: "How can I make the output JPG even smaller?",
+                        a: "After converting, use the Image Compressor tool to reduce the JPG file size further."
+                        }
+                    ]
+                    },
                 resizer: {
                     what: "Image Resizer allows you to change the dimensions (width and height) of your images. Whether you need to make images smaller for web use, create thumbnails, or resize for specific platform requirements, this tool handles it all while maintaining aspect ratio and quality.",
                     benefits: [
@@ -654,6 +754,12 @@ const toolContent = {
                     case 'jpg-to-webp':
                         convertFormat('webp');
                         break;
+                    case 'webp-to-jpg':
+                        convertFormat('jpg');
+                        break;
+                    case 'png-to-webp':
+                        convertFormat('webp');
+                        break;
                     case 'resizer':
                         resizeImage();
                         break;
@@ -669,6 +775,8 @@ const toolContent = {
                 } else if (activeTool === 'png-to-jpg') {
                     extension = 'jpg';
                 } else if (activeTool === 'jpg-to-webp') {
+                    extension = 'webp';
+                } else if (activeTool === 'png-to-webp') {
                     extension = 'webp';
                 } else if (activeTool === 'resizer' || activeTool === 'remove-exif' || activeTool === 'compressor' || activeTool === 'heic-to-jpg') {
                     extension = 'jpg';
